@@ -1,5 +1,8 @@
+using JWT.Infrastructure.ApiIO;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+//using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using System.Reflection;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var services = builder.Services;
-services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
 services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

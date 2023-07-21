@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JWT.Domain", "JWT.Domain\JW
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JWT.Manager", "Manager\JWT.Manager.csproj", "{D115BCE9-2ABB-4A83-8FAF-10332737DABF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JWT.Infrastructure", "JWT.Infrastructure\JWT.Infrastructure.csproj", "{BCC9F92E-F076-4BF6-B817-B6D147D66E24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JWT.Infrastructure", "JWT.Infrastructure\JWT.Infrastructure.csproj", "{BCC9F92E-F076-4BF6-B817-B6D147D66E24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JWT.Data", "JWT.Data\JWT.Data.csproj", "{1E46D439-E715-4209-970F-0A8C1C66E47E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{BCC9F92E-F076-4BF6-B817-B6D147D66E24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCC9F92E-F076-4BF6-B817-B6D147D66E24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCC9F92E-F076-4BF6-B817-B6D147D66E24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E46D439-E715-4209-970F-0A8C1C66E47E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E46D439-E715-4209-970F-0A8C1C66E47E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E46D439-E715-4209-970F-0A8C1C66E47E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E46D439-E715-4209-970F-0A8C1C66E47E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
