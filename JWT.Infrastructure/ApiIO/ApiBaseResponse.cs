@@ -10,6 +10,6 @@ namespace JWT.Infrastructure.ApiIO
     {
         public ApiBaseResponse() { }
         public bool ApiSuccess { get; set; }
-        public string ApiMessage { get; set; }
+        public List<string> ApiMessage { get; set; } = new();
     }
 }

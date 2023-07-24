@@ -13,22 +13,25 @@ namespace JWT.Manager.JwtAuthentication.Handler
     {
         public async Task<JwtLoginResponse> Handle(JwtLoginRequest request, CancellationToken cancellationToken)
         {
+            List<string> messages = new();
             if (request is null)
             {
+                messages.Add("Input is empty.");
                 return new()
                 {
                     Token = null,
                     ApiSuccess = false,
-                    ApiMessage = "Input is empty."
+                    ApiMessage = messages
                 };
             }
             if (string.IsNullOrEmpty(request.UsernameOrEmail) || string.IsNullOrEmpty(request.Password))
             {
+                messages.Add("You must fill in username/email and password!");
                 return new()
                 {
                     Token = null,
                     ApiSuccess = false,
-                    ApiMessage = "You must fill in username/email and password!"
+                    ApiMessage = messages
                 };
             }
             return new()
