@@ -5,6 +5,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 using System.Text;
+using FluentValidation;
+using JWT.Manager.JwtAuthentication.Request;
+using JWT.Manager.RequestValidators;
+using JWT.Manager.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +20,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var services = builder.Services;
-services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining(typeof(Program)));
+services.AddMediatR(options => options.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -36,6 +40,8 @@ services.AddAuthentication(options =>
     };
 });
 services.AddAuthentication();
+services.AddScoped<IValidator<JwtRegisterRequest>, JwtRegisterRequestValidator>();
+services.AddScoped<IValidator<JwtRegisterModel1>, JwtRegisterRequestValidator1>();
 
 var app = builder.Build();
 
