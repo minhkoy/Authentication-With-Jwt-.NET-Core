@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using FluentValidation;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace JWT.Api.Controllers
 {
@@ -32,10 +33,13 @@ namespace JWT.Api.Controllers
 
             if (!validationResult.IsValid)
             {
+                var modelStateDictionary = new ModelStateDictionary();
                 foreach(var err in validationResult.Errors)
                 {
                     Console.WriteLine("Error: {0}", err);
+                    modelStateDictionary.AddModelError(err.PropertyName, err.ErrorMessage);
                     result.Errors.Add($"Error from {err.PropertyName}: {err.ErrorMessage}");
+                    result.ErrorList = modelStateDictionary;
                 }
 
                 return FailResult(result);
@@ -51,7 +55,8 @@ namespace JWT.Api.Controllers
                 Data = null,
                 StatusCode = HttpStatusCode.OK,
                 Success = false,
-                Errors = result.Errors
+                Errors = result.Errors,
+                ErrorList = result.ErrorList,
             };
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JWT.Infrastructure.ApiIO;
 
 namespace JWT.Manager.JwtAuthentication.Response
 {
@@ -19,4 +20,5 @@ namespace JWT.Manager.JwtAuthentication.Response
         public long? DateOfBirth { get; set; }
         public string EnterpriseId { get; set; }
     }
+    
 }
