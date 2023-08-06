@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace JWT.Infrastructure.ApiIO
 {
-    public abstract class RequestBase<T>
+    public abstract class RequestBase<TRequest, TResponse> : IRequest<ApiResult<TResponse>>
     {
-        public T RequestData { get; set; }
-
+        public TRequest RequestData { get; set; }
     }
 }

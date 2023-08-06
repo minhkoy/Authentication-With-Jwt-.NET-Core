@@ -15,49 +15,50 @@ namespace JWT.Api.Controllers
     [ApiController]
     public class AuthenController : ControllerBase
     {
-        private IValidator<JwtRegisterModel1> _validator;
+        private readonly IValidator<JwtRegisterModel1> _validator;
 
         public AuthenController(IValidator<JwtRegisterModel1> validator)
         {
             _validator = validator;
         }
         
-        [AllowAnonymous]
-        [HttpPost("[action]")]
-        [ProducesResponseType(typeof(ApiResult<JwtRegisterResponse1>), (int)HttpStatusCode.OK)]
-        public async Task<ApiResult<JwtRegisterResponse1>> RegisterTemp([FromBody] JwtRegisterRequest1 request)
-        {
-            //var validator = new JwtRegisterRequestValidator1();
-            var validationResult = await _validator.ValidateAsync(request.RequestData);
-            var result = new ApiResult<JwtRegisterResponse1>();
+        //[AllowAnonymous]
+        //[HttpPost("[action]")]
+        //[ProducesResponseType(typeof(ApiResult<JwtRegisterResponse1>), (int)HttpStatusCode.OK)]
+        //public async Task<ApiResult<JwtRegisterResponse1>> RegisterTemp([FromBody] JwtRegisterRequest1 request)
+        //{
+        //    //var validator = new JwtRegisterRequestValidator1();
+        //    var validationResult = await _validator.ValidateAsync(request.RequestData);
+        //    var result = new ApiResult<JwtRegisterResponse1>();
 
-            if (!validationResult.IsValid)
-            {
-                var modelStateDictionary = new ModelStateDictionary();
-                foreach(var err in validationResult.Errors)
-                {
-                    Console.WriteLine("Error: {0}", err);
-                    modelStateDictionary.AddModelError(err.PropertyName, err.ErrorMessage);
-                    result.Errors.Add($"Error from {err.PropertyName}: {err.ErrorMessage}");
-                    result.ErrorList = modelStateDictionary;
-                }
+        //    if (!validationResult.IsValid)
+        //    {
+        //        var modelStateDictionary = new ModelStateDictionary();
+        //        foreach(var err in validationResult.Errors)
+        //        {
+        //            //Console.WriteLine("Error: {0}", err);
+        //            modelStateDictionary.AddModelError(err.PropertyName, err.ErrorMessage);
+        //            //result.Errors.Add($"Error from {err.PropertyName}: {err.ErrorMessage}");
+        //            result.ErrorList = modelStateDictionary;
+        //        }
+                
+                
 
-                return FailResult(result);
-            }
+        //        return FailResult(result);
+        //    }
 
-            return null;
-        }
+        //    return null;
+        //}
 
-        private ApiResult<JwtRegisterResponse1> FailResult(ApiResult<JwtRegisterResponse1> result)
-        {
-            return new()
-            {
-                Data = null,
-                StatusCode = HttpStatusCode.OK,
-                Success = false,
-                Errors = result.Errors,
-                ErrorList = result.ErrorList,
-            };
-        }
+        //private ApiResult<JwtRegisterResponse1> FailResult(ApiResult<JwtRegisterResponse1> result)
+        //{
+        //    return new()
+        //    {
+        //        Data = null,
+        //        StatusCode = HttpStatusCode.OK,
+        //        Success = false,
+        //        ErrorList = result.ErrorList,
+        //    };
+        //}
     }
 }

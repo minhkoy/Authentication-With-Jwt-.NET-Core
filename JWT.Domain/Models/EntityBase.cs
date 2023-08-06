@@ -13,7 +13,7 @@ namespace JWT.Domain.Models
     {
         [Key]
         [Column("ID")]
-        public string Id { get; set; } = Guid.NewGuid().ToString();
+        public string Id { get; set; } = Guid.NewGuid().ToString("N").ToUpper();
         [Column("CREATED_TIME")]
         public long CreatedTime { get; set; } = Convert.ToInt64(DateTime.Now.ToString("yyyyMMddHHmmss"));
         [Column("MODIFIED_TIME")]

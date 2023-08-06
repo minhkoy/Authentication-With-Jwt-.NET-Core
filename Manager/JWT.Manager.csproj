@@ -9,9 +9,12 @@
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.6.0" />
     <PackageReference Include="MediatR" Version="12.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\JWT.Data\JWT.Data.csproj" />
+    <ProjectReference Include="..\JWT.Helper\JWT.Helper.csproj" />
     <ProjectReference Include="..\JWT.Infrastructure\JWT.Infrastructure.csproj" />
   </ItemGroup>
 

@@ -11,7 +11,6 @@ namespace JWT.Infrastructure.ApiIO
     {
         public T Data { get; set; }
         public bool Success { get; set; }
-        public List<string> Errors { get; set; } = new();
         public object ErrorList { get; set; }
         public HttpStatusCode StatusCode { get; set; }
         //public E ErrorValidations { get; set; }

@@ -6,13 +6,17 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JWT.Infrastructure.ApiIO;
 
 namespace JWT.Manager.JwtAuthentication.Request
 {
-    public class JwtLoginRequest : IRequest<JwtLoginResponse>
+    public class JwtLoginRequest : RequestBase<JwtLoginModel, JwtLoginResponse>
+    {
+    }
+
+    public class JwtLoginModel
     {
         public string UsernameOrEmail { get; set; }
-        [Required]
         public string Password { get; set; }
     }
 }

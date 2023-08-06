@@ -15,6 +15,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JWT.Data", "JWT.Data\JWT.Da
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{3E0D4C15-F4BE-4ECE-8457-9F38FD6BBC7D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JWT.Localization", "JWT.Localization\JWT.Localization.csproj", "{918E0CF1-BA3A-4538-AD9D-D070ADFD66E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JWT.Helper", "JWT.Helper\JWT.Helper.csproj", "{7C40BB85-E3AC-4C48-AF86-6EDDFA39E88C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +45,14 @@ Global
 		{1E46D439-E715-4209-970F-0A8C1C66E47E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E46D439-E715-4209-970F-0A8C1C66E47E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E46D439-E715-4209-970F-0A8C1C66E47E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{918E0CF1-BA3A-4538-AD9D-D070ADFD66E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{918E0CF1-BA3A-4538-AD9D-D070ADFD66E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{918E0CF1-BA3A-4538-AD9D-D070ADFD66E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{918E0CF1-BA3A-4538-AD9D-D070ADFD66E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C40BB85-E3AC-4C48-AF86-6EDDFA39E88C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C40BB85-E3AC-4C48-AF86-6EDDFA39E88C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C40BB85-E3AC-4C48-AF86-6EDDFA39E88C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C40BB85-E3AC-4C48-AF86-6EDDFA39E88C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

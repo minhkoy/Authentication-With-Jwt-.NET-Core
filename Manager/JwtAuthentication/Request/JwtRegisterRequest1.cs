@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace JWT.Manager.JwtAuthentication.Request
 {
-    public class JwtRegisterRequest1 : RequestBase<JwtRegisterModel1>
+    public class JwtRegisterRequest1 : RequestBase<JwtRegisterModel1, bool>
     {
     }
 

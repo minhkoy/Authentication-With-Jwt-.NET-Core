@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace JWT.Manager.JwtAuthentication.Response
 {
-    public class JwtLoginResponse : ApiBaseResponse
+    public class JwtLoginResponse
     {
         public JwtLoginResponse() { }
         public string Token { get; set; }
