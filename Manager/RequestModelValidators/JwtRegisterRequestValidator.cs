@@ -6,16 +6,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JWT.Data.Interfaces;
 
 namespace JWT.Manager.RequestModelValidators
 {
     public class JwtRegisterRequestValidator : AbstractValidator<JwtRegisterModel>
     {
         private readonly JwtDbContext _jwtContext;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public JwtRegisterRequestValidator(JwtDbContext jwtDbContext)
+        public JwtRegisterRequestValidator(JwtDbContext jwtDbContext, IUnitOfWork unitOfWork)
         {
             _jwtContext = jwtDbContext;
+            _unitOfWork = unitOfWork;
             RuleFor(request => request.Username).NotEmpty().WithMessage("Username is required.");
             RuleFor(request => request.Username).MinimumLength(6)
                 .WithMessage("Username must be at least 6 characters.");
@@ -45,13 +48,15 @@ namespace JWT.Manager.RequestModelValidators
 
         private bool BeUniqueEmail(string email)
         {
-            bool isExistEmail = _jwtContext.Users.Any(x => x.Email.Equals(email));
+            bool isExistEmail = _unitOfWork.UserInfos
+                .GetQueryable().Any(x => x.Email.Equals(email));
             return !isExistEmail;
         }
 
         private bool BeUniqueUsername(string username)
         {
-            var isExistUsername = _jwtContext.Users.Any(x => x.Username.Equals(username));
+            var isExistUsername = _unitOfWork.UserInfos
+                .GetQueryable().Any(x => x.Username.Equals(username));
             return !isExistUsername;
         }
     }
