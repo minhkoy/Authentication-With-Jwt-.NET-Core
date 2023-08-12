@@ -46,5 +46,13 @@ namespace JWT.Api.Controllers
         {
             return true;
         }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpGet("[action]")]
+        [ProducesResponseType(typeof(JwtGetUserInfoResponse), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetUserInfo()
+        {
+            return Ok(await this.Mediator.Send(new JwtGetUserInfoRequest()));
+        }
     }
 }

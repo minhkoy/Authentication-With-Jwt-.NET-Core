@@ -18,22 +18,26 @@ using JWT.Domain.Models;
 using JWT.Helper.Extensions;
 using JWT.Helper.HelperProperties;
 using Microsoft.EntityFrameworkCore;
+using JWT.Data.Interfaces;
 
 namespace JWT.Manager.JwtAuthentication.Handler
 {
     public class JwtRegisterHandler : RequestHandler<JwtRegisterRequest, JwtRegisterResponse>
     {
+        private readonly IUnitOfWork _unitOfWork;
         private readonly JwtDbContext _jwtDbContext;
         private readonly IValidator<JwtRegisterModel> _validator;
         private readonly JwtOption _jwtOption;
 
         public JwtRegisterHandler(JwtDbContext jwtDbContext,
             IValidator<JwtRegisterModel> validator,
-            IOptions<JwtOption> options)
+            IOptions<JwtOption> options,
+            IUnitOfWork unitOfWork)
         {
             _jwtDbContext = jwtDbContext;
             _validator = validator;
             _jwtOption = options.Value;
+            _unitOfWork = unitOfWork;
         }
         public override async Task<ApiResult<JwtRegisterResponse>> Handle(JwtRegisterRequest request, CancellationToken cancellationToken)
         {
@@ -71,8 +75,8 @@ namespace JWT.Manager.JwtAuthentication.Handler
                 IsEmailConfirmed = false
             };
 
-            _jwtDbContext.Add(newUser);
-            await _jwtDbContext.SaveChangesAsync();
+            _unitOfWork.UserInfos.Add(newUser);
+            await _unitOfWork.SaveChangesAsync();
             
             return new()
             {

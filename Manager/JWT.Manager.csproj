@@ -18,4 +18,10 @@
     <ProjectReference Include="..\JWT.Infrastructure\JWT.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="JwtRoleManager\Handler\" />
+    <Folder Include="JwtRoleManager\Response\" />
+    <Folder Include="JwtRoleManager\Request\" />
+  </ItemGroup>
+
 </Project>

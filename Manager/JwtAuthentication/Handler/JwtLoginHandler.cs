@@ -16,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace JWT.Manager.JwtAuthentication.Handler
 {
@@ -45,10 +46,11 @@ namespace JWT.Manager.JwtAuthentication.Handler
             {
                 var data = request.RequestData;
                 var validationResult = await _validator.ValidateAsync(data);
+                var errors = new ModelStateDictionary();
 
                 if (!validationResult.IsValid)
                 {
-                    var errors = new ModelStateDictionary();
+                    
                     foreach (var error in validationResult.Errors)
                     {
                         errors.AddModelError(error.PropertyName, error.ErrorMessage);
@@ -67,26 +69,16 @@ namespace JWT.Manager.JwtAuthentication.Handler
                     .GetQueryable()
                     .FirstOrDefaultAsync(x => x.Username.Equals(data.UsernameOrEmail)
                                               || x.Email.Equals(data.UsernameOrEmail));
-                if (people is null)
-                {
-                    return new()
-                    {
-                        Data = null,
-                        StatusCode = HttpStatusCode.OK,
-                        Success = false,
-                        ErrorList = new List<string>() {"Username/email or password is incorrect."}
-                    };
-                }
 
-                var hashedInputPassword = HelperExtensions.HashingWithKey(data.Password, people.SecurityKey);
-                if (!hashedInputPassword.Equals(people.HashedPassword))
+                if (!people.IsEmailConfirmed)
                 {
+                    errors.AddModelError("Functional", "Email is not confirmed");
                     return new()
                     {
                         Data = null,
                         StatusCode = HttpStatusCode.OK,
                         Success = false,
-                        ErrorList = new List<string>() {"Username/email or password is incorrect."}
+                        ErrorList = errors
                     };
                 }
                 

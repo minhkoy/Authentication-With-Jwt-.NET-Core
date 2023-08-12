@@ -12,12 +12,12 @@ namespace JWT.Manager.RequestModelValidators
 {
     public class JwtRegisterRequestValidator : AbstractValidator<JwtRegisterModel>
     {
-        private readonly JwtDbContext _jwtContext;
+        //private readonly JwtDbContext _jwtContext;
         private readonly IUnitOfWork _unitOfWork;
 
         public JwtRegisterRequestValidator(JwtDbContext jwtDbContext, IUnitOfWork unitOfWork)
         {
-            _jwtContext = jwtDbContext;
+            //_jwtContext = jwtDbContext;
             _unitOfWork = unitOfWork;
             RuleFor(request => request.Username).NotEmpty().WithMessage("Username is required.");
             RuleFor(request => request.Username).MinimumLength(6)
