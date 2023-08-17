@@ -10,13 +10,11 @@ using JWT.Data;
 using JWT.Data.Interfaces;
 using JWT.Domain.Models;
 using JWT.Helper.Config;
-using JWT.Helper.Extensions;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace JWT.Manager.JwtAuthentication.Handler
 {
@@ -119,9 +117,9 @@ namespace JWT.Manager.JwtAuthentication.Handler
             var claims = new List<Claim>()
             {
                 new Claim(ClaimTypes.Sid, user.Id),
-                //new Claim(ClaimTypes.NameIdentifier, user.Username),
-                // new Claim(ClaimTypes.Email, user.Email),
-                // new Claim(ClaimTypes.Name, user.Fullname),
+                new Claim(ClaimTypes.NameIdentifier, user.Username),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Name, user.Fullname),
                 // new Claim(ClaimTypes.DateOfBirth, user.DateOfBirth.ToString()),
                 // new Claim(ClaimTypes.MobilePhone, user.PhoneNumber)
             };

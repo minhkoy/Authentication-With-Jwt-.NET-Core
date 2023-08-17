@@ -16,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using JWT.Manager.RequestModelValidators;
 using JWT.Manager.RequestValidators;
 using Microsoft.OpenApi.Models;
+using JWT.InternalServices;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -95,6 +96,7 @@ services.AddDbContext<JwtDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnStr"), b => b.MigrationsAssembly("JWT.Data"));
 });
 
+services.AddInternalService();
 services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 services.AddValidators();
 

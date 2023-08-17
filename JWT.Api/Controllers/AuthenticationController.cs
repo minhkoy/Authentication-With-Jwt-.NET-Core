@@ -14,7 +14,7 @@ namespace JWT.Api.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
-        protected IMediator Mediator { get; }
+        private IMediator Mediator { get; }
         private readonly IConfiguration _config;
         public AuthenticationController(IConfiguration config,
             IMediator mediator)

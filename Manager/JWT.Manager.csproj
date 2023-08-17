@@ -16,6 +16,7 @@
     <ProjectReference Include="..\JWT.Data\JWT.Data.csproj" />
     <ProjectReference Include="..\JWT.Helper\JWT.Helper.csproj" />
     <ProjectReference Include="..\JWT.Infrastructure\JWT.Infrastructure.csproj" />
+    <ProjectReference Include="..\JWT.InternalServices\JWT.InternalServices.csproj" />
   </ItemGroup>
 
   <ItemGroup>

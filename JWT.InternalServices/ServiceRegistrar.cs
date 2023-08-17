@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using JWT.InternalServices.Interfaces;
+using JWT.InternalServices.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace JWT.InternalServices
 {
@@ -6,7 +8,7 @@ namespace JWT.InternalServices
     {
         public static void AddInternalService(this IServiceCollection services)
         {
-
+            services.AddTransient<IJwtAuthenTokenService, JwtAuthenTokenService>();
         }
     }
 }
