@@ -44,6 +44,7 @@ public class JwtAuthenTokenService : IJwtAuthenTokenService
         return new JwtTokenGetLoginInfoDTO
         {
             Id = token.Claims.FirstOrDefault(x => x.Type.Equals(ClaimTypes.Sid))?.Value,
+            FullName = token.Claims.FirstOrDefault(x => x.Type.Equals(ClaimTypes.Name))?.Value,
             Roles = token.Claims.Where(x => x.Type.Equals(ClaimTypes.Role)).Select(x => x.Value).ToList(),
         };
     }

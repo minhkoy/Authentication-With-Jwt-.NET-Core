@@ -10,5 +10,6 @@ namespace JWT.Infrastructure.ApiIO
     public abstract class RequestBase<TRequest, TResponse> : IRequest<ApiResult<TResponse>>
     {
         public TRequest RequestData { get; set; }
+        public string Language { get; set; }
     }
 }

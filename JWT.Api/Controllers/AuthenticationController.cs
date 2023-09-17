@@ -12,6 +12,7 @@ namespace JWT.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+   //Host[("*:7001")]
     public class AuthenticationController : ControllerBase
     {
         private IMediator Mediator { get; }
@@ -53,6 +54,14 @@ namespace JWT.Api.Controllers
         public async Task<IActionResult> GetUserInfo()
         {
             return Ok(await this.Mediator.Send(new JwtGetUserInfoRequest()));
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPost("[action]")]
+        [ProducesResponseType(typeof(bool), 200)]
+        public async Task<IActionResult> Logout()
+        {
+            return Ok(await this.Mediator.Send(new JwtLogoutRequest()));
         }
     }
 }

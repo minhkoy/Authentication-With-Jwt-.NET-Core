@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 using System.Text;
 using FluentValidation;
+using JWT.Api.Middlewares;
 using JWT.Data;
 using JWT.Data.Interfaces;
 using JWT.Data.UnitOfWork;
@@ -13,10 +14,11 @@ using JWT.Helper.Config;
 using JWT.Manager.JwtAuthentication.Request;
 //using JWT.Manager.Validators;
 using Microsoft.EntityFrameworkCore;
-using JWT.Manager.RequestModelValidators;
-using JWT.Manager.RequestValidators;
+using JWT.Manager.JwtAuthentication.Validator;
 using Microsoft.OpenApi.Models;
 using JWT.InternalServices;
+using JWT.Manager;
+using JWT.Manager.Bases;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -34,6 +36,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssembly(JWT.Manager.AssemblyReference.Assembly);
+    config.AddOpenBehavior(typeof(ValidationBehavior<,>));
     //config.AddOpenBehavior(typeof(GenericBehavior<,>))
 });
 builder.Services.AddHttpContextAccessor();
@@ -54,7 +57,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidAudience = builder.Configuration["JwtOption:Issuer"],
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtOption:Key"]))
         };
-    });
+    })
+    .AddCookie();
 builder.Services.AddSwaggerGen(s =>
 {
     s.SwaggerDoc("v1", new OpenApiInfo
@@ -112,7 +116,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("AllowAnyCorsPolicy");
 app.UseHttpsRedirection();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseAuthentication();
 app.UseAuthorization();

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using JWT.Data.Interfaces;
 
-namespace JWT.Manager.RequestModelValidators
+namespace JWT.Manager.JwtAuthentication.Validator
 {
     public class JwtRegisterRequestValidator : AbstractValidator<JwtRegisterModel>
     {

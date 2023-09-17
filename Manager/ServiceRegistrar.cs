@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using JWT.Manager.RequestModelValidators;
+using JWT.Manager.JwtAuthentication.Validator;
 
-namespace JWT.Manager.RequestValidators
+namespace JWT.Manager
 {
     public static class ServiceRegistrar
     {

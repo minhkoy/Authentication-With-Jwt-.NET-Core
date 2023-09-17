@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JWT.Manager.RequestValidators
+namespace JWT.Manager.JwtAuthentication.Validator
 {
     public class JwtLoginRequestValidator : AbstractValidator<JwtLoginModel>
     {
@@ -22,7 +22,7 @@ namespace JWT.Manager.RequestValidators
             RuleFor(x => x.UsernameOrEmail).NotEmpty().WithMessage("Username or email is required.");
             RuleFor(x => x.Password).NotEmpty().WithMessage("Password cannot be empty");
             RuleFor(x => x).Must(IsExist).WithName("Functional").WithMessage("Username or password is incorrect");
-            
+
         }
 
         private bool IsExist(JwtLoginModel model)

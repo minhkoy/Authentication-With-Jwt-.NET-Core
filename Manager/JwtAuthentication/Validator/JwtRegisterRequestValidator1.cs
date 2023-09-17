@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JWT.Manager.RequestValidators
+namespace JWT.Manager.JwtAuthentication.Validator
 {
     public class JwtRegisterRequestValidator1 : AbstractValidator<JwtRegisterModel1>
     {

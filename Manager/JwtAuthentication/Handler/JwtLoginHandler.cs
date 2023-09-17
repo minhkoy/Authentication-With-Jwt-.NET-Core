@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Http;
 
 namespace JWT.Manager.JwtAuthentication.Handler
 {
@@ -25,17 +26,20 @@ namespace JWT.Manager.JwtAuthentication.Handler
         private readonly JwtDbContext _jwtDbContext;
         private readonly JwtOption _jwtOption;
         private readonly IConfiguration _configuration;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         public JwtLoginHandler(IValidator<JwtLoginModel> validator,
             JwtDbContext jwtDbContext,
             IOptions<JwtOption> jwtOption,
             IConfiguration config,
-            IUnitOfWork unitOfWork)
+            IUnitOfWork unitOfWork,
+            IHttpContextAccessor httpContextAccessor)
         {
             _validator = validator;
             _jwtDbContext = jwtDbContext;
             _jwtOption = jwtOption.Value;
             _configuration = config;
             _unitOfWork = unitOfWork;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public override async Task<ApiResult<JwtLoginResponse>> Handle(JwtLoginRequest request, CancellationToken cancellationToken)
@@ -81,6 +85,13 @@ namespace JWT.Manager.JwtAuthentication.Handler
                 }
                 
                 var token = GenerateJwtForUser(people);
+                var isAddCookieSuccess = AddCookie(token);
+
+                if (!isAddCookieSuccess)
+                {
+                    throw new Exception("Login");
+                }
+
                 return new()
                 {
                     Data = new()
@@ -135,6 +146,27 @@ namespace JWT.Manager.JwtAuthentication.Handler
                 expires: DateTime.Now.AddMonths(3),
                 signingCredentials: credentials);
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+        private bool AddCookie(string token)
+        {
+            try
+            {
+                var context = _httpContextAccessor.HttpContext;
+                //var responseCookies = request.Cookies["LoginCookie"];
+                var response = context.Response;
+                if (string.IsNullOrEmpty(context.Request.Cookies["LoginToken"]))
+                {
+                    CookieOptions options = new();
+                    options.Expires = DateTime.Now.AddMonths(3);
+                    var responseCookies = context.Response.Cookies;
+                    responseCookies.Append("LoginToken", token, options);
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"{ex}");
+            }
         }
     }
 }

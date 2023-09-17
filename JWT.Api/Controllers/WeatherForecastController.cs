@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace JWT.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
+    //[Host("*:7002")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
